@@ -1,38 +1,74 @@
 var randomResult;
-var win;
-var loss;
+var win = 0;
+var loss = 0;
+var previous = 0;
+
+var resetAndStart = function () {
+    $(".crystals").empty();
+
+
+
 
 randomResult= Math.floor(Math.random() * 100) + 20;
 
-console.log(randomResult);
 
-$("#result").html('Random Result: ');
+$("#result").html('Random Result: ' + randomResult);
 
 for (var i = 0; i < 4; i++) {
 
-    var random = Math.floor(Math.random() * 12);
-    console.log(random);
+    var random = Math.floor(Math.random() * 11) + 1;
     var crystal = $("<div>");
         crystal.attr({
             "class": 'crystal', "data-random": random
         });
 
-    $(".crystals").append(crystal);
+        crystal.html(random);
+    
+        $(".crystals").append(crystal);
+
+    }
+    $("#previous").html("Total Score: " + previous);
+
 
 }
 
 
+resetAndStart();
+
+$(document).on("click", ".crystal", function() {
+   
+    var num = parseInt($(this).attr("data-random"));
+
+    previous += num;
+
+    $("#previous").html("Total Score: " + previous);
+
+    if(previous > randomResult) {
+        loss++;
+
+        $("#loss").html("Losses: "+ loss);
+
+        previous = 0;
+      
+        
+
+        resetAndStart();
+    }
+    else if(previous === randomResult) {
+        win++;
+        
+        $("#win").html("Wins: " + win);
 
 
-//Pseudo Code
 
-//On opening-randomly generated number to match will be between 19-120
+        previous = 0;
 
-//crystals are randomly generated bewtween 1-12-
+        resetAndStart();
 
-//user interaction-
-    //when a crystal is clicked, that random number gets added to the user score which will be a counter
+    }
+});
 
 
-    //if the user adds up the total number exactly then the user wins but if the user over guesses the total then that is a loss for the user
-    //After the user either wins or loses the values of the crystals reset as well as the total and user score.
+
+
+
