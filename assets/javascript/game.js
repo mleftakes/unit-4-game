@@ -6,13 +6,26 @@ var previous = 0;
 var resetAndStart = function () {
     $(".crystals").empty();
 
+    var images = [
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ95gKSXcg6QyRQrEGEiyN2eEKIxvXOIS0vFrsTJ4eAZvW4Ouie",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWQgNrRkuTBBuv9AGN1iHes1FobwL7Jx84v4eT1kCyGLklbjhZXQ",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcZ58WD_yi5omMVzD8N2MiGTnZU6dr_5EqDRoYpQqkYRkbWp2O",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGT_DrhPa4siZ_Vws_gYlGQXDo4ttdmLDIg98m7tgw3seqJS2MEA",
 
+
+
+
+        // "../images/crystal1.jpg",
+        // "../images/crystal2.jpg",
+        // "../images/crystal3.jpg",
+        // "../images/crystal4.jpg",
+    ];
 
 
 randomResult= Math.floor(Math.random() * 100) + 20;
 
 
-$("#result").html('Random Result: ' + randomResult);
+$("#result").html('Objective: ' + randomResult);
 
 for (var i = 0; i < 4; i++) {
 
@@ -22,7 +35,12 @@ for (var i = 0; i < 4; i++) {
             "class": 'crystal', "data-random": random
         });
 
-        crystal.html(random);
+        crystal.css({
+            "background-image": "url(" + images[i] + ")", 
+            "background-size" : "cover",
+        });
+
+        // crystal.html(random);
     
         $(".crystals").append(crystal);
 
